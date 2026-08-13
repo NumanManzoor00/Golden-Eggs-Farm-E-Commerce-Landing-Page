@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Feather Farm — Farm Fresh Eggs, Meat &amp; Chicks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF6EC;
+    --cream-dim:#F3ECDC;
+    --barn-red:#A13D2C;
+    --barn-red-dark:#832F21;
+    --hay-gold:#DDA33D;
+    --coop-brown:#5C4632;
+    --meadow-green:#4B6B4A;
+    --charcoal:#2B2622;
+    --line:#E3D8C2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--coop-brown);
+    font-family:'Work Sans',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    color:var(--charcoal);
+    font-weight:600;
+    line-height:1.1;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+  :focus-visible{outline:3px solid var(--hay-gold);outline-offset:3px;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,246,236,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1160px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--charcoal);}
+  .brand svg{width:34px;height:34px;flex-shrink:0;}
+  .nav-links{display:flex;gap:32px;font-size:.95rem;font-weight:500;}
+  .nav-links a{position:relative;padding:4px 0;}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--barn-red);transition:width .25s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .cart-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--charcoal);color:var(--cream);
+    padding:10px 18px;border-radius:100px;
+    font-size:.9rem;font-weight:600;border:none;cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .cart-btn:hover{background:var(--barn-red);transform:translateY(-1px);}
+  .cart-count{background:var(--hay-gold);color:var(--charcoal);border-radius:100px;padding:1px 8px;font-size:.78rem;}
+  @media (max-width:820px){.nav-links{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:88px 0 64px;border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;
+    color:var(--barn-red);background:#F3E3DD;
+    border:1px solid #E3C3B7;padding:6px 14px;border-radius:100px;
+    margin-bottom:22px;letter-spacing:.03em;
+  }
+  .hero h1{font-size:clamp(2.4rem,4.6vw,3.6rem);margin-bottom:22px;letter-spacing:-.01em;}
+  .hero h1 em{font-style:normal;color:var(--barn-red);}
+  .hero p{font-size:1.08rem;max-width:46ch;color:var(--coop-brown);margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:8px;font-weight:600;font-size:.96rem;
+    border:1.5px solid transparent;cursor:pointer;transition:all .2s ease;
+  }
+  .btn-primary{background:var(--barn-red);color:var(--cream);}
+  .btn-primary:hover{background:var(--barn-red-dark);transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(161,61,44,.55);}
+  .btn-ghost{background:transparent;border-color:var(--coop-brown);color:var(--coop-brown);}
+  .btn-ghost:hover{background:var(--charcoal);color:var(--cream);border-color:var(--charcoal);}
+
+  .hero-art{position:relative;aspect-ratio:1/.92;}
+  .sun{position:absolute;top:8%;right:10%;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #F4C466, var(--hay-gold));
+    box-shadow:0 0 60px 10px rgba(221,163,61,.35);
+    animation:sunPulse 5s ease-in-out infinite;}
+  @keyframes sunPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+  .coop-scene{position:absolute;inset:0;}
+
+  /* trust strip */
+  .trust{padding:38px 0;border-bottom:1px solid var(--line);}
+  .trust-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+  .trust-item{display:flex;align-items:center;gap:12px;font-size:.92rem;color:var(--coop-brown);}
+  .trust-item svg{width:26px;height:26px;color:var(--barn-red);flex-shrink:0;}
+
+  /* PRODUCTS */
+  .products{padding:88px 0;}
+  .section-head{max-width:560px;margin-bottom:52px;}
+  .section-head .eyebrow{background:#EAF0E9;color:var(--meadow-green);border-color:#CFE0CD;}
+  .section-head h2{font-size:clamp(1.9rem,3vw,2.5rem);margin-bottom:14px;}
+  .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  @media (max-width:900px){.product-grid{grid-template-columns:1fr;}.hero-grid{grid-template-columns:1fr;}.hero-art{max-width:420px;margin:0 auto;}}
+
+  .card{
+    position:relative;
+    background:var(--cream-dim);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:32px 28px 28px;
+    overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 20px 40px -20px rgba(43,38,34,.25);border-color:var(--hay-gold);}
+  .card-icon{width:64px;height:64px;margin-bottom:20px;color:var(--barn-red);}
+  .card h3{font-size:1.35rem;margin-bottom:8px;}
+  .card p{font-size:.94rem;color:var(--coop-brown);margin-bottom:18px;}
+  .price-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+  .price{font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--charcoal);font-weight:500;}
+  .price span{font-size:.75rem;color:var(--coop-brown);font-family:'Work Sans',sans-serif;}
+  .add-btn{
+    width:100%;padding:12px;border-radius:8px;border:1.5px solid var(--charcoal);
+    background:transparent;color:var(--charcoal);font-weight:600;font-size:.9rem;
+    cursor:pointer;transition:background .2s ease,color .2s ease;
+  }
+  .add-btn:hover{background:var(--charcoal);color:var(--cream);}
+  .add-btn.added{background:var(--meadow-green);border-color:var(--meadow-green);color:#fff;}
+
+  /* stamp seal — signature element */
+  .stamp{
+    position:absolute;top:22px;right:22px;
+    width:74px;height:74px;
+    display:flex;align-items:center;justify-content:center;
+    border:2px solid var(--barn-red);border-radius:50%;
+    color:var(--barn-red);
+    font-family:'JetBrains Mono',monospace;
+    font-size:.62rem;font-weight:500;text-align:center;line-height:1.15;
+    text-transform:uppercase;letter-spacing:.03em;
+    transform:scale(0) rotate(-18deg);opacity:0;
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+  }
+  .card:hover .stamp{transform:scale(1) rotate(-12deg);opacity:1;}
+  .stamp::before{
+    content:'';position:absolute;inset:6px;border:1px dashed var(--barn-red);border-radius:50%;
+  }
+
+  /* WHY US */
+  .why{padding:80px 0;background:var(--charcoal);color:var(--cream);}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+  .why h2{color:var(--cream);font-size:clamp(1.8rem,3vw,2.3rem);margin-bottom:18px;}
+  .why p.lead{color:#D8CFC2;max-width:42ch;margin-bottom:8px;}
+  .why-list{list-style:none;}
+  .why-list li{
+    display:flex;gap:16px;padding:20px 0;border-bottom:1px solid #443B33;
+  }
+  .why-list li:last-child{border-bottom:none;}
+  .why-num{font-family:'JetBrains Mono',monospace;color:var(--hay-gold);font-size:.85rem;flex-shrink:0;padding-top:2px;}
+  .why-list h4{color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;margin-bottom:4px;}
+  .why-list p{color:#C7BCAD;font-size:.9rem;}
+
+  /* ORDER CTA */
+  .order-cta{padding:88px 0;text-align:center;}
+  .order-cta h2{font-size:clamp(1.9rem,3.4vw,2.6rem);max-width:20ch;margin:0 auto 18px;}
+  .order-cta p{max-width:50ch;margin:0 auto 34px;color:var(--coop-brown);}
+  .order-form{
+    max-width:520px;margin:0 auto;
+    display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+    background:var(--cream-dim);border:1px solid var(--line);border-radius:12px;padding:10px;
+  }
+  .order-form input{
+    flex:1 1 220px;padding:14px 16px;border:none;background:transparent;
+    font-family:'Work Sans',sans-serif;font-size:.95rem;color:var(--charcoal);
+  }
+  .order-form input:focus{outline:none;}
+  .order-form button{flex:0 0 auto;}
+  .form-note{margin-top:14px;font-size:.82rem;color:var(--coop-brown);}
+
+  footer{border-top:1px solid var(--line);padding:48px 0 32px;}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:32px;}
+  .foot-brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;color:var(--charcoal);margin-bottom:8px;}
+  .foot-col h5{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--coop-brown);margin-bottom:12px;}
+  .foot-col a,.foot-col p{display:block;font-size:.9rem;color:var(--coop-brown);margin-bottom:8px;}
+  .foot-col a:hover{color:var(--barn-red);}
+  .foot-bottom{font-size:.8rem;color:#9C8E7C;border-top:1px solid var(--line);padding-top:20px;}
+
+  .toast{
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--charcoal);color:var(--cream);padding:14px 24px;border-radius:100px;
+    font-size:.9rem;font-weight:500;opacity:0;pointer-events:none;transition:all .3s ease;z-index:100;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" fill="#DDA33D"/><path d="M14 30c0-8 6-14 10-14s10 6 10 14" stroke="#2B2622" stroke-width="2" fill="none"/><circle cx="18" cy="22" r="1.6" fill="#2B2622"/><path d="M24 16c2-3 5-3 5 0-2 0-4 1-5 3" fill="#A13D2C"/></svg>
+      Golden Feather Farm
+    </div>
+    <div class="nav-links">
+      <a href="#products">Shop</a>
+      <a href="#why">Why Us</a>
+      <a href="#order">Order</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="cart-btn" id="cartBtn">
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">● Fresh off the farm — daily</span>
+      <h1>Real eggs. Real meat.<br>Raised <em>right</em>, sold <em>direct</em>.</h1>
+      <p>Golden Feather Farm raises free-range hens the honest way. Order farm-fresh eggs, dressed poultry, and healthy day-old chicks — delivered straight from our coop to your kitchen.</p>
+      <div class="hero-ctas">
+        <a href="#products" class="btn btn-primary">Shop Fresh Stock</a>
+        <a href="#order" class="btn btn-ghost">Place a Bulk Order</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="sun"></div>
+      <svg class="coop-scene" viewBox="0 0 420 380" fill="none">
+        <ellipse cx="210" cy="345" rx="190" ry="20" fill="#E3D8C2"/>
+        <rect x="70" y="200" width="220" height="120" rx="6" fill="#8A6A4E"/>
+        <polygon points="60,200 300,200 180,120" fill="#A13D2C"/>
+        <rect x="150" y="250" width="60" height="70" rx="4" fill="#5C4632"/>
+        <circle cx="250" cy="240" r="16" fill="#FBF6EC" stroke="#5C4632" stroke-width="2"/>
+        <g transform="translate(120,260)">
+          <ellipse cx="0" cy="20" rx="30" ry="24" fill="#FBF6EC" stroke="#2B2622" stroke-width="2"/>
+          <circle cx="24" cy="4" r="14" fill="#FBF6EC" stroke="#2B2622" stroke-width="2"/>
+          <polygon points="36,2 48,6 36,10" fill="#DDA33D"/>
+          <circle cx="30" cy="0" r="1.6" fill="#2B2622"/>
+          <path d="M18 -8c-4-6 4-10 8-4" fill="#A13D2C"/>
+        </g>
+        <g transform="translate(300,290) scale(.8)">
+          <ellipse cx="0" cy="20" rx="26" ry="20" fill="#F4C466" stroke="#2B2622" stroke-width="2"/>
+          <circle cx="20" cy="6" r="12" fill="#F4C466" stroke="#2B2622" stroke-width="2"/>
+          <circle cx="25" cy="2" r="1.4" fill="#2B2622"/>
+        </g>
+        <circle cx="340" cy="140" r="4" fill="#DDA33D"/>
+        <circle cx="60" cy="100" r="3" fill="#DDA33D"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap trust-row">
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z"/></svg>100% Free-Range</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Collected Daily</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Farm-to-Door Delivery</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 13 4 4L19 7"/></svg>No Antibiotics Added</div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">● Available Now</span>
+      <h2>Shop the coop</h2>
+      <p>Three ways to bring the farm home — order individually or set up a standing weekly delivery.</p>
+    </div>
+    <div class="product-grid">
+
+      <div class="card">
+        <div class="stamp">Farm<br>Fresh<br>Today</div>
+        <svg class="card-icon" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="36" rx="20" ry="24" fill="#FBF6EC" stroke="#A13D2C" stroke-width="2.5"/><ellipse cx="32" cy="36" rx="20" ry="24" fill="none" stroke="#DDA33D" stroke-width="1" stroke-dasharray="2 3"/></svg>
+        <h3>Farm-Fresh Eggs</h3>
+        <p>Collected each morning from free-roaming hens. Sold by the dozen or in bulk crates.</p>
+        <div class="price-row"><span class="price">Rs 380 <span>/ dozen</span></span></div>
+        <button class="add-btn" data-item="Eggs (dozen)">Add to Order</button>
+      </div>
+
+      <div class="card">
+        <div class="stamp">Hand<br>Dressed<br>Daily</div>
+        <svg class="card-icon" viewBox="0 0 64 64" fill="none"><path d="M20 40c0-14 8-24 12-24s12 10 12 24-6 16-12 16-12-2-12-16Z" fill="#FBF6EC" stroke="#A13D2C" stroke-width="2.5"/><path d="M26 20c-2-4 2-8 6-4" stroke="#A13D2C" stroke-width="2.5" fill="none"/></svg>
+        <h3>Dressed Poultry</h3>
+        <p>Whole or cut broiler chicken, hand-processed same day and chilled for delivery.</p>
+        <div class="price-row"><span class="price">Rs 650 <span>/ kg</span></span></div>
+        <button class="add-btn" data-item="Dressed Chicken (kg)">Add to Order</button>
+      </div>
+
+      <div class="card">
+        <div class="stamp">Healthy<br>Day-Old<br>Stock</div>
+        <svg class="card-icon" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="38" r="16" fill="#F4C466" stroke="#A13D2C" stroke-width="2.5"/><circle cx="32" cy="20" r="9" fill="#F4C466" stroke="#A13D2C" stroke-width="2.5"/><polygon points="41,20 50,23 41,26" fill="#A13D2C"/></svg>
+        <h3>Day-Old Chicks</h3>
+        <p>Vaccinated, healthy layer &amp; broiler chicks ready for pickup or local delivery.</p>
+        <div class="price-row"><span class="price">Rs 90 <span>/ chick</span></span></div>
+        <button class="add-btn" data-item="Day-Old Chicks">Add to Order</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="wrap why-grid">
+    <div>
+      <span class="eyebrow" style="background:#443B33;color:#F4C466;border-color:#5C4632;">● Why Golden Feather</span>
+      <h2>Raised the way farming used to be.</h2>
+      <p class="lead">No shortcuts, no crowded cages — just space to roam, clean feed, and a farmer who checks every coop by hand, every day.</p>
+    </div>
+    <ul class="why-list">
+      <li><span class="why-num">01</span><div><h4>Open-range coops</h4><p>Our birds roam pasture by day and roost safe by night — lower stress, better eggs.</p></div></li>
+      <li><span class="why-num">02</span><div><h4>Same-day freshness</h4><p>Eggs and dressed meat leave the farm the same day they're collected or processed.</p></div></li>
+      <li><span class="why-num">03</span><div><h4>Transparent sourcing</h4><p>Ask us anything — feed, breed, or hatch date. We keep records on every flock.</p></div></li>
+      <li><span class="why-num">04</span><div><h4>Direct from farmer to you</h4><p>No middlemen. You order straight from us, so pricing stays fair on both ends.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="order-cta" id="order">
+  <div class="wrap">
+    <span class="eyebrow">● Bulk &amp; Standing Orders</span>
+    <h2>Want weekly delivery or a bulk order?</h2>
+    <p>Restaurants, shops, and households welcome. Leave your number and what you need — we'll call back to confirm pricing and delivery day.</p>
+    <form class="order-form" id="orderForm">
+      <input type="text" placeholder="Your name" required>
+      <input type="tel" placeholder="Phone number" required>
+      <button type="submit" class="btn btn-primary">Request Callback</button>
+    </form>
+    <p class="form-note">This is a prototype form — connect it to your phone/WhatsApp or an order backend before launch.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Golden Feather Farm</div>
+        <p style="max-width:32ch;font-size:.9rem;color:var(--coop-brown);">Family-run poultry farm supplying fresh eggs, dressed meat, and healthy chicks.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Shop</h5>
+        <a href="#products">Eggs</a>
+        <a href="#products">Dressed Chicken</a>
+        <a href="#products">Day-Old Chicks</a>
+      </div>
+      <div class="foot-col">
+        <h5>Farm</h5>
+        <a href="#why">Why Us</a>
+        <a href="#order">Bulk Orders</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <p>Lodhran, Punjab, Pakistan</p>
+        <p>+92 3XX XXXXXXX</p>
+        <p>hello@goldenfeatherfarm.pk</p>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Golden Feather Farm. Prototype site — replace placeholder name, prices &amp; contact details with your own.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let cartCount = 0;
+  const cartCountEl = document.getElementById('cartCount');
+  const toast = document.getElementById('toast');
+  let toastTimer;
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>toast.classList.remove('show'), 2200);
+  }
+
+  document.querySelectorAll('.add-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      cartCount++;
+      cartCountEl.textContent = cartCount;
+      const original = btn.textContent;
+      btn.textContent = 'Added ✓';
+      btn.classList.add('added');
+      showToast(btn.dataset.item + ' added to your order');
+      setTimeout(()=>{
+        btn.textContent = original;
+        btn.classList.remove('added');
+      }, 1400);
+    });
+  });
+
+  document.getElementById('cartBtn').addEventListener('click', ()=>{
+    showToast(cartCount === 0 ? 'Your order list is empty' : `${cartCount} item(s) in your order — checkout coming soon`);
+  });
+
+  document.getElementById('orderForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    showToast("Thanks! We'll call you back to confirm your order.");
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>
